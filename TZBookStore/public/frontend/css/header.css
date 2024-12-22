@@ -1,0 +1,363 @@
+/* Topbar */
+.auth-btn {
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.auth-btn-register {
+    background-color: #d4a373; /* Màu nâu nhạt */
+    border: 1px solid #d4a373;
+    color: #fff;
+}
+
+.auth-btn-register:hover {
+    background-color: #c49667;
+    border-color: #c49667;
+    color: #fff;
+}
+
+.auth-btn-login {
+    background-color: transparent;
+    border: 1px solid #d4a373;
+    color: #d4a373;
+}
+
+.auth-btn-login:hover {
+    background-color: #d4a373;
+    color: #fff;
+}
+
+/* Thêm hiệu ứng khi hover */
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Thêm hiệu ứng khi click */
+.auth-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+
+/*  */
+
+
+
+.icon-f:hover > i {
+    scale: 1.2;
+    color: rgb(35, 140, 226);
+}
+
+.icon-l:hover > i {
+    scale: 1.2;
+    color: #fff;
+}
+
+
+.icon-g:hover > i {
+    scale: 1.2;
+    color: rgb(102, 102, 102);
+}
+
+.icon-i:hover > i {
+    scale: 1.2;
+    color: rgb(224, 52, 187);
+}
+
+
+.icon:before {
+    background: var(--color);
+    content: "";
+    position: absolute;
+    width: 130%;
+    height: 130%;
+    left: -110%;
+    top: 80%;
+    transform: rotate(45deg);
+}
+
+.icon :hover::before {
+    animation: slide 0.7s forwards;
+}
+@keyframes slide {
+    50% {
+        left: 10%;
+        top: -40%;
+    }
+    100% {
+        left: -15%;
+        top: -15%;
+    }
+}
+
+/* Navbar */
+.navbar-dark-fixed {
+    background-color: #1E1916 !important;
+    transition: background-color 0.3s ease; /* Hiệu ứng mượt */
+  }
+
+  .cart-btn {
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cart-btn:hover {
+    background-color: #EAA636; /* Màu xanh dương */
+    color: white;
+    transform: scale(1.05); /* Hiệu ứng phóng lớn nhẹ */
+}
+
+.cart-btn i {
+    font-size: 20px; /* Kích thước biểu tượng */
+}
+
+.cart-text {
+    font-size: 16px; /* Kích thước chữ */
+}
+
+.badge {
+    font-size: 12px; /* Kích thước số lượng */
+    padding: 4px 6px;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 1100;
+    border: none;
+    margin-top: 10px !important;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+/* User info container */
+.user-info {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+
+.user-greeting {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-greeting:hover {
+    color: #d4a373;
+}
+
+.user-greeting i {
+    font-size: 18px;
+    color: #d4a373;
+    transition: all 0.3s ease;
+}
+
+.user-greeting:hover i {
+    transform: scale(1.1);
+}
+
+/* User menu button */
+.user-menu-btn {
+    background-color: transparent;
+    border: none;
+    color: #d4a373;
+    padding: 6px 12px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.user-menu-btn:hover {
+    background-color: rgba(212, 163, 115, 0.2);
+    color: #fff;
+}
+
+/* Dropdown items */
+.dropdown-item {
+    padding: 10px 20px;
+    color: #333;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #d4a373;
+    padding-left: 25px;
+}
+
+.dropdown-divider {
+    margin: 5px 0;
+    border-color: #f0f0f0;
+}
+
+/* Ensure dropdown is properly positioned */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+.btn-light {
+    background-color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s;
+}
+
+.btn-light:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+    border-top: 1px solid #eee;
+}
+
+.user-welcome {
+    font-size: 14px;
+    color: #fff;
+}
+
+.btn-user-menu {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-user-menu:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* User button styles */
+.btn-light.dropdown-toggle {
+    background-color: #fff;
+    border: none;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-light.dropdown-toggle:hover {
+    background-color: #663a0e;
+    color: #fff;
+}
+
+.btn-light.dropdown-toggle:hover i {
+    color: #fff;
+}
+
+/* Welcome text styles */
+.header text-light {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Button styles */
+.btn-light.rounded-pill {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    z-index: 1050;
+}
+
+.btn-light.rounded-pill:hover {
+    background-color: #f0f0f0;
+}
+
+.btn-light.rounded-pill:active {
+    background-color: #e9ecef;
+}
+
+.small {
+    font-size: 0.75rem;
+}
+
+/* Dropdown container */
+.dropdown {
+    position: relative;
+}
+
+/* Đảm bảo dropdown menu hiển thị đúng vị trí */
+.dropdown-menu-end {
+    right: 0;
+    left: auto;
+    margin-top: 10px !important;
+}
+
+/* Thêm khoảng cách cho dropdown menu */
+.top-bar {
+    position: relative;
+    z-index: 1100;
+}
+
+/* Điều chỉnh vị trí của navbar */
+.navbar-dark.fixed-top {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Điều chỉnh khoảng cách cho nội dung chính */
+.container-xxl {
+    padding-top: 100px;
+}
+
+.navbar .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: #ffc107 !important; /* Hoặc màu primary của bạn */
+}
+
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #ffc107; /* Hoặc màu primary của bạn */
+    color: #000;
+}
+
+
+
+
+
+

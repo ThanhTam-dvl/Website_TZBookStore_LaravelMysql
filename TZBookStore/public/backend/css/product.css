@@ -1,0 +1,47 @@
+/* manage product */
+
+.product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .tm-product-table td {
+    vertical-align: middle;
+  }
+  
+  /* Thêm các style mới */
+  .tm-product-table {
+    color: #ffffff !important;
+  }
+  
+  .tm-product-table thead th {
+    color: #ffd700 !important; /* Màu vàng cho header */
+  }
+  
+  .tm-product-name {
+    color: #00ffff !important; /* Màu xanh cyan cho tên sản phẩm */
+    cursor: pointer;
+  }
+  
+  .tm-block-title {
+    color: #ffffff !important;
+  }
+  
+  .tm-product-delete-icon {
+    color: #ff6b6b !important; /* Màu đỏ nhạt cho icon xóa */
+  }
+  
+  /* Đảm bảo màu chữ trong modal */
+  .modal-content {
+    color: #ffffff;
+    background-color: #435c70 !important;
+  }
+  
+  .modal-title {
+    color: #ffffff;
+  }
+
+  
+  
