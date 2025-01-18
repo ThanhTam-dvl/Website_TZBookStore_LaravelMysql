@@ -64,16 +64,32 @@ class CartController extends Controller
     }
 
     public function remove($book_id)
-    {
+{
+    try {
         $cart = session()->get('cart', []);
         
         if(isset($cart[$book_id])) {
             unset($cart[$book_id]);
             session()->put('cart', $cart);
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Sản phẩm đã được xóa khỏi giỏ hàng!'
+            ]);
         }
         
-        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng!');
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy sản phẩm trong giỏ hàng!'
+        ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Có lỗi xảy ra khi xóa sản phẩm!'
+        ]);
     }
+}
 
     public function updateSelected(Request $request, $book_id)
     {

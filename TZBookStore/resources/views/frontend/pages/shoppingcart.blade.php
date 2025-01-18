@@ -28,67 +28,62 @@
                 <div class="col-lg-8">
                     @foreach($cartItems as $item)
                     <div class="card mb-3 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <!-- Checkbox -->
-                                <div class="col-auto">
-                                    <input type="checkbox" 
-                                           class="form-check-input item-checkbox" 
-                                           data-item-id="{{ $item['cart_item_id'] }}"
-                                           data-price="{{ $item['price'] }}"
-                                           data-quantity="{{ $item['quantity'] }}"
-                                           {{ $item['selected'] ? 'checked' : '' }}>
-                                </div>
+    <div class="card-body">
+        <div class="row align-items-center flex-wrap">
+            <!-- Checkbox -->
+            <div class="col-auto mb-2">
+                <input type="checkbox" 
+                       class="form-check-input item-checkbox" 
+                       data-item-id="{{ $item['cart_item_id'] }}"
+                       data-price="{{ $item['price'] }}"
+                       data-quantity="{{ $item['quantity'] }}"
+                       {{ $item['selected'] ? 'checked' : '' }}>
+            </div>
 
-                                <!-- Book Image -->
-                                <div class="col-auto">
-                                    <img src="{{ asset($item['image_url'] ?? 'assets/default-book.jpg') }}" 
-                                         alt="{{ $item['title'] }}" 
-                                         class="img-fluid rounded"
-                                         style="width: 100px; height: 140px; object-fit: cover;">
-                                </div>
+            <!-- Book Image -->
+            <div class="book-image col-auto mb-2">
+                <img src="{{ asset($item['image_url'] ?? 'assets/default-book.jpg') }}" 
+                     alt="{{ $item['title'] }}" 
+                     class="img-fluid rounded"
+                     style="width: 80px; height: 120px; object-fit: cover;">
+            </div>
 
-                                <!-- Book Details -->
-                                <div class="col">
-                                    <h5 class="mb-2">{{ $item['title'] }}</h5>
-                                    <p class="text-muted mb-2 small">
-                                        <i class="fas fa-user-edit me-2"></i>{{ $item['author'] ?? 'Không có tác giả' }}
-                                    </p>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <span class="text-primary fw-bold me-3">{{ number_format($item['price']) }}đ</span>
-                                        <div class="quantity-control d-flex align-items-center">
-                                            <button type="button" 
-                                                    class="btn btn-outline-secondary btn-sm" 
-                                                    onclick="updateQuantity('{{ $item['cart_item_id'] }}', {{ $item['quantity'] - 1 }})">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                            <input type="number" 
-                                                   class="form-control form-control-sm text-center mx-2" 
-                                                   value="{{ $item['quantity'] }}" 
-                                                   min="1" 
-                                                   style="width: 60px;"
-                                                   readonly>
-                                            <button type="button" 
-                                                    class="btn btn-outline-secondary btn-sm" 
-                                                    onclick="updateQuantity('{{ $item['cart_item_id'] }}', {{ $item['quantity'] + 1 }})">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+            <!-- Book Details -->
+            <div class="col mb-2">
+                <h5 class="mb-2">{{ $item['title'] }}</h5>
+                <div class="text-primary fw-bold">{{ number_format($item['price']) }}đ</div>
+                <div class="quantity-control quantity-cpntrol-mobile d-flex align-items-center  mt-2">
+                    <button type="button" 
+                            class="btn btn-outline-secondary btn-sm" 
+                            onclick="updateQuantity('{{ $item['cart_item_id'] }}', {{ $item['quantity'] - 1 }})">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" 
+                           class="form-control form-control-sm text-center mx-2" 
+                           value="{{ $item['quantity'] }}" 
+                           min="1" 
+                           style="width: 60px;"
+                           readonly>
+                    <button type="button" 
+                            class="btn btn-outline-secondary btn-sm" 
+                            onclick="updateQuantity('{{ $item['cart_item_id'] }}', {{ $item['quantity'] + 1 }})">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
 
-                                <!-- Remove Button -->
-                                <div class="col-auto">
-                                    <form action="{{ route('cart.remove', $item['cart_item_id']) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-link text-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Remove Button -->
+            <div class="col-auto">
+                <button type="button" 
+                        onclick="removeCartItem('{{ $item['cart_item_id'] }}')" 
+                        class="btn btn-link text-danger">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
                     @endforeach
                 </div>
 
@@ -141,6 +136,7 @@
     background-color: var(--primary);
     border-color: var(--primary);
 }
+
 </style>
 
 @endsection
@@ -193,6 +189,28 @@ $(document).ready(function() {
         });
     });
 });
+
+// Xử lý sự kiện xóa sản phẩm khỏi giỏ hàng
+function removeCartItem(bookId) {
+    if(confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+        $.ajax({
+            url: '/cart/remove/' + bookId,
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if(response.success) {
+                    window.location.reload();
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi xóa sản phẩm!');
+            }
+        });
+    }
+}
 
 function proceedToCheckout() {
     @auth

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }} - Admin</title>
+
+    <link rel="shortcut icon" href="{{asset('backend/img/Logo TZBookStore Admin.png')}}" type="image/x-icon">
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -16,7 +18,7 @@
     @stack('styles')
 </head>
 
-<body>
+<body> 
     @include('backend.components.navbar')
     
     <div class="container-fluid">

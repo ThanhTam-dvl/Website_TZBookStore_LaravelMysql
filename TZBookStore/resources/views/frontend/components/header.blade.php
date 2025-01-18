@@ -1,5 +1,5 @@
 <style>
-/* CSS mặc định cho navbar khi có topbar */
+/* CSS mặc định cho navbar */
 .navbar {
     background: transparent;
     transition: all 0.3s ease-in-out;
@@ -13,16 +13,89 @@
     padding-bottom: 0.5rem;
 }
 
+/* Ẩn account menu trên desktop */
+.account-menu {
+    display: none;
+}
+
+/* Styling cho account name và dropdown */
+.user-greeting {
+    cursor: pointer;
+    color: #fff;
+}
+
+#account-name {
+    display: none;
+    margin-left: 0.5rem;
+}
+
+/* Hiển thị tên khi dropdown được mở */
+.show #account-name {
+    display: inline !important;
+}
+
+.user-dropdown {
+    min-width: 200px;
+    padding: 0.5rem 0;
+}
+
+.dropdown-menu li {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* CSS cho màn hình dưới 991px */
 @media (max-width: 991.98px) {
     .navbar {
         background: var(--dark);
     }
+
+    .account-menu {
+        display: block;
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1030;
+    }
+
+    .navbar-brand {
+        position: absolute;
+        left: 47%;
+        transform: translateX(-50%);
+        margin: 0;
+    }
+
+    .navbar-toggler {
+        margin-left: auto;
+    }
+
+    #navbarCollapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--dark);
+        padding: 1rem;
+    }
+
+    #account-logo {
+        display: block;
+    }
+}
+
+/* Ẩn logo account khi có topbar */
+.topbar-visible #account-logo {
+    display: none;
 }
 </style>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
+
+    // Kiểm tra nếu `hideTopbar` đang được bật
     @if($hideTopbar)
         navbar.classList.add('no-topbar');
     @endif
@@ -39,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 
 <!-- Topbar Start -->
 @if(!$hideTopbar)
@@ -108,12 +182,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="account-menu">
+        @guest
+            <a class="btn auth-btn auth-btn-login" href="{{ route('login') }}">
+                <i class="fas fa-sign-in-alt"></i>
+            </a>
+        @endguest
+        
+        @auth
+            <div class="dropdown">
+                <span class="user-greeting" 
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    id="account-logo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="account-name">{{ Auth::user()->full_name }}</span>
+                </span>
+                <ul class="dropdown-menu dropdown-menu-end user-dropdown">
+                    <li>
+                        <a class="dropdown-item" href="{{ route('order.history') }}">
+                            <i class="fas fa-history me-2"></i>Lịch sử đơn hàng
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        @endauth
+    </div>
+
     <a href="{{ route('home') }}" class="navbar-brand ms-4 ms-lg-0">
         <h1 class="text-primary m-0">TZ BookStore</h1>
     </a>
+
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto p-4 p-lg-0">
             <a class="nav-item nav-link {{ Request::routeIs('home') ? 'active' : '' }}" 
@@ -155,3 +267,35 @@ document.addEventListener('DOMContentLoaded', function() {
 </nav>
 <!-- Navbar End -->
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    const accountDropdown = document.querySelector('.account-menu .dropdown');
+    
+    @if($hideTopbar)
+        navbar.classList.add('no-topbar');
+    @endif
+
+    // Thêm class khi scroll
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+            navbar.classList.add('navbar-scrolled');
+        } else {
+            @if(!$hideTopbar)
+                navbar.classList.remove('navbar-scrolled');
+            @endif
+        }
+    });
+
+    // Bootstrap 5 event listener cho dropdown
+    if(accountDropdown) {
+        accountDropdown.addEventListener('show.bs.dropdown', function () {
+            document.querySelector('#account-name').style.display = 'inline';
+        });
+
+        accountDropdown.addEventListener('hide.bs.dropdown', function () {
+            document.querySelector('#account-name').style.display = 'none';
+        });
+    }
+});
+</script>

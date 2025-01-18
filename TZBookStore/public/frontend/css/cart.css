@@ -19,14 +19,34 @@
 
         .quantity-control {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
         .quantity-control input {
             width: 60px;
             text-align: center;
+        }
+
+        @media (max-width: 435px) {
+            .quantity-control button {
+                width: 25px !important;
+                height: 23px !important;
+                font-size: .700rem !important;
+            }
+             
+            .quantity-control input {
+                width: 40px !important;
+                height: 23px !important;
+                font-size: .700rem !important;
+            }
+
+            .quantity-control {
+                width: 100px;
+            }
+
+            .book-image {
+                padding-left: 6px !important;
+                padding-right: 6px !important;
+            }
         }
 
         .cart-item-content {

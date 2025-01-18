@@ -64,7 +64,7 @@ class AuthController extends Controller
             'full_name' => $validated['full_name'],
             'username' => $validated['username'],
             'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
+            'password' => $validated['password'], // Không mã hóa
         ]);
 
         Auth::login($user);

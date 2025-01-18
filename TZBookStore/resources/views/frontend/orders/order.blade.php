@@ -14,7 +14,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <form action="{{ route('order.store') }}" method="POST">
+                    <form id="payment-form" action="{{ route('order.store') }}" method="POST">
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -80,9 +80,6 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary rounded-pill py-3 px-5 w-100 mt-4">
-                            Xác Nhận Đặt Hàng
-                        </button>
                     </form>
                 </div>
             </div>
@@ -116,6 +113,11 @@
                         <h6 class="fw-bold">Tổng Cộng</h6>
                         <h6 class="fw-bold text-primary">{{ number_format($totalAmount) }}đ</h6>
                     </div>
+
+                    <!-- Nút xác nhận đặt hàng -->
+                    <button type="submit" form="payment-form" class="btn btn-primary rounded-pill py-3 px-5 w-100 mt-4">
+                        Xác Nhận Đặt Hàng
+                    </button>
                 </div>
             </div>
         </div>
