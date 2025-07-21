@@ -58,4 +58,6 @@ Các bảng chính:
 git clone https://github.com/ThanhTam-dvl/Website_TZBookStore_LaravelMysql.git
 cd Website_TZBookStore_LaravelMysql
 
-Bước 2: Cài đặt dependencies
+### Bước 2: Cài đặt dependencies
+composer install
+npm install
