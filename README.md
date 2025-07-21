@@ -57,3 +57,5 @@ Các bảng chính:
 ```bash
 git clone https://github.com/ThanhTam-dvl/Website_TZBookStore_LaravelMysql.git
 cd Website_TZBookStore_LaravelMysql
+
+Bước 2: Cài đặt dependencies
