@@ -74,66 +74,45 @@ Các bảng chính:
 git clone https://github.com/ThanhTam-dvl/Website_TZBookStore_LaravelMysql.git
 cd Website_TZBookStore_LaravelMysql
 2. Cài dependencies
-bash
-Copy
-Edit
 composer install
 npm install
+
 3. Cấu hình môi trường
-bash
-Copy
-Edit
 cp .env.example .env
 php artisan key:generate
+
 4. Cấu hình database trong .env
-env
-Copy
-Edit
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=tzbookstore
 DB_USERNAME=root
 DB_PASSWORD=your_password
+
 5. Tạo CSDL
-bash
-Copy
-Edit
 mysql -u root -p -e "CREATE DATABASE tzbookstore;"
+
 6. Chạy migration & seed (nếu không có file SQL)
-bash
-Copy
-Edit
 php artisan migrate --seed
 (Hoặc dùng SQL thủ công nếu có file bookstoredb.sql)
 
 7. Biên dịch frontend
-bash
-Copy
-Edit
 npm run build
+
 8. Khởi chạy ứng dụng
-bash
-Copy
-Edit
 php artisan serve
 👉 Truy cập: http://localhost:8000
 
 👤 Tài khoản demo
 Người dùng:
 Email: customer1@bookstore.com.vn
-
 Mật khẩu: 123456
 
 Quản trị viên:
 Email: adminthanhtam@bookstore.com.vn
-
 Mật khẩu: 123456
 
 📁 Cấu trúc thư mục chính
-bash
-Copy
-Edit
 app/
 ├── Http/
 │   ├── Controllers/
@@ -176,18 +155,12 @@ Backend (Admin)
 ✅ Kiểm thử
 Chạy các unit test:
 
-bash
-Copy
-Edit
 php artisan test
 🤝 Đóng góp
 Fork repo
 
 Tạo branch mới:
 
-bash
-Copy
-Edit
 git checkout -b feature/tinh-nang-moi
 Commit & push
 
